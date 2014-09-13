@@ -53,7 +53,7 @@ class MimeGenerator
       @headers.each do |name, value|
         if multipart? && name =~ /content-type/i
           io.print "#{name}: #{value}; \r\n"
-          io.print "\tboundary=\"---=_Part_#{@id}\"\r\n"
+          io.print "\tboundary=\"----=_Part_#{@id}\"\r\n"
         else
           io.print "#{name}: #{value}\r\n"
         end
