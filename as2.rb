@@ -94,7 +94,6 @@ class Handler
     smime_data.puts
     smime_data.puts [env['rack.input'].read].pack('m*')
 
-    open('message.data', 'w'){|f| f << smime_data.string}
     smime = OpenSSL::PKCS7.read_smime(smime_data.string)
     smime_decrypted = smime.decrypt $pkey, $cert
     smime = OpenSSL::PKCS7.read_smime smime_decrypted

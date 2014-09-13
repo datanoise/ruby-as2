@@ -49,8 +49,6 @@ http.start do
   resp = http.request(req)
   body = resp.body
 
-  open('resp.data', 'w'){|f| f << body }
-
   smime = OpenSSL::PKCS7.read_smime "Content-Type: #{resp['Content-Type']}\r\n#{body}"
   smime.verify [$pcert], $store
 
