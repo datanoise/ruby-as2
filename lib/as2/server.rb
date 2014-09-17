@@ -87,14 +87,6 @@ module AS2
       @info = Config.server_info
     end
 
-    def logger
-      @logger ||= Logger.new STDERR
-    end
-
-    def logger=(logger)
-      @logger = logger
-    end
-
     def call(env)
       if env['HTTP_AS2_TO'] != @info.name
         return send_error(env, "Invalid destination name #{env['HTTP_AS2_TO']}")
@@ -139,8 +131,12 @@ module AS2
 
     private
 
+    def logger(env)
+      env['rack.logger']
+    end
+
     def send_error(env, msg)
-      logger.error msg
+      logger(env).error msg
       send_mdn env, nil, msg
     end
 
