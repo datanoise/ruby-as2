@@ -82,6 +82,8 @@ module AS2
       'Content-Type' => 'CONTENT_TYPE',
     }
 
+    attr_accessor :logger
+
     def initialize(&block)
       @block = block
       @info = Config.server_info
@@ -132,7 +134,7 @@ module AS2
     private
 
     def logger(env)
-      env['rack.logger']
+      @logger ||= Logger.new env['rack.errors']
     end
 
     def send_error(env, msg)
