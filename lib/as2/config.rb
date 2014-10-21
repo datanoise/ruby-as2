@@ -15,7 +15,7 @@ module AS2
       end
     end
 
-    class ServerInfo < Struct.new :name, :url, :certificate, :pkey
+    class ServerInfo < Struct.new :name, :url, :certificate, :pkey, :domain
       def url=(url)
         if url.kind_of? String
           self['url'] = URI.parse url
@@ -63,6 +63,9 @@ module AS2
         end
         unless @server_info.url
           raise 'Your URL is required'
+        end
+        unless @server_info.domain
+          raise 'Your domain name is required'
         end
         store.add_cert @server_info.certificate
       end

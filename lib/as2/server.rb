@@ -158,9 +158,9 @@ module AS2
       notification['Content-Transfer-Encoding'] = '7bit'
 
       options = {
-        'Reporting-UA' => 'WebTM',
-        'Original-Recipient' => 'rfc822; WebTM',
-        'Final-Recipient' => 'rfc822; WebTM',
+        'Reporting-UA' => @info.name,
+        'Original-Recipient' => "rfc822; #{@info.name}",
+        'Final-Recipient' => "rfc822; #{@info.name}",
         'Original-Message-ID' => env['HTTP_MESSAGE_ID']
       }
       if failed
@@ -187,8 +187,8 @@ module AS2
       headers = {}
       headers['Content-Type'] = content_type
       headers['MIME-Version'] = '1.0'
-      headers['Message-ID'] = "<webtm-#{Time.now.strftime('%Y%m%d%H%M%S')}@ryderwebtm.com>"
-      headers['AS2-From'] = 'WebTM'
+      headers['Message-ID'] = "<#{@info.name}-#{Time.now.strftime('%Y%m%d%H%M%S')}@#{@info.domain}>"
+      headers['AS2-From'] = @info.name
       headers['AS2-To'] = env['HTTP_AS2_FROM']
       headers['AS2-Version'] = '1.2'
       headers['Connection'] = 'close'
