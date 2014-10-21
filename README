@@ -1,0 +1,3 @@
+This is a proof of concept implementation of AS2 protocol: http://www.ietf.org/rfc/rfc4130.txt.
+
+Tested with the mendelson AS2 implementation from http://as2.mendelson-e-c.com
