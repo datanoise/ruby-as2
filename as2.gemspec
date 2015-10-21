@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.files       = %w|README LICENSE| + %x|git ls-files lib|.split
   s.homepage    = 'http://github.com/datanoise/ruby-as2'
   s.license     = 'MIT'
+  s.add_dependency('mail', "~> 2.6")
 end
